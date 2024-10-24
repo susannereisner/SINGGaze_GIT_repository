@@ -3,7 +3,7 @@ SING Gaze Project, Wieki, University of Vienna
 Script author: Pierre Labendzki
 June 2024
 
-This script runs cluster-based permutation analyses of look-related changes
+This script plots the permutation analyses of look-related changes
 in audio features. 
 
 """
