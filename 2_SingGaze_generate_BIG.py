@@ -93,8 +93,9 @@ def gen_ERC(time_serie, look_onsets, window_size):
     ERCs = np.zeros(2*window_size_samples)
     for look in look_onsets:
 
-        #get the local tempo for that song ans paricipant at that time 
-        # tempo = tempi[int(100*look)]
+        #get the local tempo for that song ans paricipant at that time - not properly working in python!
+            # we got song tempi with the MIRtoolbox. this does not allow for sliding window analysis,
+            # which we would need for the SF analysis        # tempo = tempi[int(100*look)]
         # print('tempo = ' ,tempo)
         # ref_tempo = 120  
         # # stretch the time dimension so that every ERC contains exactly 3beats before and after look onset
