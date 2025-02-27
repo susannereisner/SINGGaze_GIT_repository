@@ -16,38 +16,38 @@ infant social gaze within 5 seconds AND if there is not >1 s silence in the audi
 
 
 import os
-import librosa
+# import librosa
 #import audiotools
-import subprocess
-import matplotlib.pyplot as plt
-import researchpy as rp
+# import subprocess
+# import matplotlib.pyplot as plt
+# import researchpy as rp
 import pandas as pd
 import numpy as np
-import math
+# import math
 
-from librosa.effects import time_stretch 
+# from librosa.effects import time_stretch 
 
-from scipy import signal
-import scipy.stats
-from scipy import stats
+# from scipy import signal
+# import scipy.stats
+# from scipy import stats
 from csv import writer
 import random as rd
-from scipy.stats import levene
-from scipy.signal import find_peaks
-from scipy.io import wavfile as io
-from scipy.signal import hilbert, chirp
-from scipy.signal import butter,filtfilt
-from scipy.fftpack import fft
-from scipy.fftpack import rfft
+# from scipy.stats import levene
+# from scipy.signal import find_peaks
+# from scipy.io import wavfile as io
+# from scipy.signal import hilbert, chirp
+# from scipy.signal import butter,filtfilt
+# from scipy.fftpack import fft
+# from scipy.fftpack import rfft
 
-from scipy.stats import entropy
-#relative entropy = KLdiv
-from scipy.special import rel_entr
+# from scipy.stats import entropy
+# #relative entropy = KLdiv
+# from scipy.special import rel_entr
 
 from filtering import *
 
-from random import seed
-from random import randint
+# from random import seed
+# from random import randint
 
 def append_list_as_row(file_name, list_of_elem):
     # Open file in append mode
@@ -196,7 +196,8 @@ def make_sure_enough_ERCs(ERCs): #make sur that the ERC list is at least thresho
         return ERCs[:threshold][:]        
 
     
-path_look_file = 'W:/hoehl/projects/sing/Behavioural_coding/Gaze/ECG_body_Susanne/raw_data/'
+# path_look_file = 'W:/hoehl/projects/sing/Behavioural_coding/Gaze/ECG_body_Susanne/raw_data/'    #old path
+path_look_file = 'W:/hoehl/projects/sing/Behavioural_coding/Gaze/SingGaze_looks/'
 look_file_list = os.listdir(path_look_file)
 print(look_file_list)
 N = len(look_file_list)
@@ -246,8 +247,14 @@ BIG_ERCs_F0_SUR_TOTAL = np.zeros(2*window_size_samples)
 # #output directory for csv files
 # output_dir = '/home/luigi/pCloudDrive/ONACSA/Temp for Researchers/Pierre/Susanne/ERCs/'
 # output_dir_big = '/home/luigi/pCloudDrive/ONACSA/Temp for Researchers/Pierre/Susanne/BIG/'
-output_dir = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/csv_files/'
-output_dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/BIG/'
+
+# FIRST SUBMISSION
+# output_dir = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/csv_files/'
+# output_dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/BIG/'
+
+# REVISION
+output_dir = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/revision/revision_csv/'
+output_dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/revision/revision_npy_BIG_onsets/'
 
 
 for ppt_id in ppt_id_list:
@@ -310,7 +317,7 @@ for ppt_id in ppt_id_list:
 
 
 # generate surrogate data looks
-    N_random = 1600 # using 1300 to compensate for deletion of segments later
+    N_random = 1600 # using 1600 to compensate for deletion of segments later
     looks_pla_SUR = np.random.uniform(low = start_pla+1, high= end_pla-1, size=N_random)
     looks_lul_SUR = np.random.uniform(low = start_lul+1, high= end_lul-1, size=N_random)
 
@@ -470,35 +477,35 @@ for ppt_id in ppt_id_list:
 
 
 
-np.save(output_dir_big+"BIG_ERCs_SF_PLA.npy", BIG_ERCs_SF_PLA[:])
-np.save(output_dir_big+"BIG_ERCs_SF_SUR_PLA.npy", BIG_ERCs_SF_SUR_PLA[:])
+np.save(output_dir_big+"BIG_ERCs_SF_PLA_ON.npy", BIG_ERCs_SF_PLA[:])
+np.save(output_dir_big+"BIG_ERCs_SF_SUR_PLA_ON.npy", BIG_ERCs_SF_SUR_PLA[:])
 
-np.save(output_dir_big+"BIG_ERCs_SF_LUL.npy", BIG_ERCs_SF_LUL[:])
-np.save(output_dir_big+"BIG_ERCs_SF_SUR_LUL.npy", BIG_ERCs_SF_SUR_LUL[:])
+np.save(output_dir_big+"BIG_ERCs_SF_LUL_ON.npy", BIG_ERCs_SF_LUL[:])
+np.save(output_dir_big+"BIG_ERCs_SF_SUR_LUL_ON.npy", BIG_ERCs_SF_SUR_LUL[:])
 
-np.save(output_dir_big+"BIG_ERCs_SF_TOTAL.npy", BIG_ERCs_SF_TOTAL[:])
-np.save(output_dir_big+"BIG_ERCs_SF_SUR_TOTAL.npy", BIG_ERCs_SF_SUR_TOTAL[:])
-
-
-
-np.save(output_dir_big+"BIG_ERCs_env_PLA.npy", BIG_ERCs_env_PLA)
-np.save(output_dir_big+"BIG_ERCs_env_SUR_PLA.npy", BIG_ERCs_env_SUR_PLA)
-
-np.save(output_dir_big+"BIG_ERCs_env_LUL.npy", BIG_ERCs_env_LUL)
-np.save(output_dir_big+"BIG_ERCs_env_SUR_LUL.npy", BIG_ERCs_env_SUR_LUL)
-
-np.save(output_dir_big+"BIG_ERCs_env_TOTAL.npy", BIG_ERCs_env_TOTAL)
-np.save(output_dir_big+"BIG_ERCs_env_SUR_TOTAL.npy", BIG_ERCs_env_SUR_TOTAL)
+np.save(output_dir_big+"BIG_ERCs_SF_TOTAL_ON.npy", BIG_ERCs_SF_TOTAL[:])
+np.save(output_dir_big+"BIG_ERCs_SF_SUR_TOTAL_ON.npy", BIG_ERCs_SF_SUR_TOTAL[:])
 
 
 
-np.save(output_dir_big+"BIG_ERCs_F0_PLA.npy", BIG_ERCs_F0_PLA)
-np.save(output_dir_big+"BIG_ERCs_F0_SUR_PLA.npy", BIG_ERCs_F0_SUR_PLA)
+np.save(output_dir_big+"BIG_ERCs_env_PLA_ON.npy", BIG_ERCs_env_PLA)
+np.save(output_dir_big+"BIG_ERCs_env_SUR_PLA_ON.npy", BIG_ERCs_env_SUR_PLA)
 
-np.save(output_dir_big+"BIG_ERCs_F0_LUL.npy", BIG_ERCs_F0_LUL)
-np.save(output_dir_big+"BIG_ERCs_F0_SUR_LUL.npy", BIG_ERCs_F0_SUR_LUL)
+np.save(output_dir_big+"BIG_ERCs_env_LUL_ON.npy", BIG_ERCs_env_LUL)
+np.save(output_dir_big+"BIG_ERCs_env_SUR_LUL_ON.npy", BIG_ERCs_env_SUR_LUL)
 
-np.save(output_dir_big+"BIG_ERCs_F0_TOTAL.npy", BIG_ERCs_F0_TOTAL)
-np.save(output_dir_big+"BIG_ERCs_F0_SUR_TOTAL.npy", BIG_ERCs_F0_SUR_TOTAL)
+np.save(output_dir_big+"BIG_ERCs_env_TOTAL_ON.npy", BIG_ERCs_env_TOTAL)
+np.save(output_dir_big+"BIG_ERCs_env_SUR_TOTAL_ON.npy", BIG_ERCs_env_SUR_TOTAL)
+
+
+
+np.save(output_dir_big+"BIG_ERCs_F0_PLA_ON.npy", BIG_ERCs_F0_PLA)
+np.save(output_dir_big+"BIG_ERCs_F0_SUR_PLA_ON.npy", BIG_ERCs_F0_SUR_PLA)
+
+np.save(output_dir_big+"BIG_ERCs_F0_LUL_ON.npy", BIG_ERCs_F0_LUL)
+np.save(output_dir_big+"BIG_ERCs_F0_SUR_LUL_ON.npy", BIG_ERCs_F0_SUR_LUL)
+
+np.save(output_dir_big+"BIG_ERCs_F0_TOTAL_ON.npy", BIG_ERCs_F0_TOTAL)
+np.save(output_dir_big+"BIG_ERCs_F0_SUR_TOTAL_ON.npy", BIG_ERCs_F0_SUR_TOTAL)
 
 

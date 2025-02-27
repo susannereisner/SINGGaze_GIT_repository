@@ -6,7 +6,7 @@ June 2024
 This script runs permutation analyses of look-related changes in audio features. 
 """
 
-# import os
+import os
 # import matplotlib.pyplot as plt
 # import researchpy as rp
 # import pandas as pd
@@ -75,27 +75,36 @@ def compare_real_to_cluster(real_p, RDN_CORR, threshold):
     return is_significant
 
 
+'''
+First, find out how many cores your PC has -> this determines on how many cores
+you can run the multiprocessing
+'''
+os.cpu_count()
+
+
 
 ''' SF '''
 
-#SF TOTAL
-if __name__ == "__main__":
-    window_size = 5
-    padd = 0
-    frame_rate = 100
-    window_size_samples = window_size * frame_rate
-    dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/BIG/'
-    BIG_ERCs_SF_TOTAL = np.load(dir_big + '/BIG_ERCs_SF_TOTAL.npy')
-    BIG_ERCs_SF_SUR_TOTAL = np.load(dir_big + '/BIG_ERCs_SF_SUR_TOTAL.npy')
-    BIG_ERCs_SF_TOTAL = np.delete(BIG_ERCs_SF_TOTAL, 0, axis=0)
-    BIG_ERCs_SF_SUR_TOTAL = np.delete(BIG_ERCs_SF_SUR_TOTAL, 0, axis=0)
+# #SF TOTAL
+# if __name__ == "__main__":
+#     window_size = 5
+#     padd = 0
+#     frame_rate = 100
+#     window_size_samples = window_size * frame_rate
+#     # dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/BIG/'
+#     dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/revision/revision_npy_BIG_onsets/'
+#     BIG_ERCs_SF_TOTAL_ON = np.load(dir_big + '/BIG_ERCs_SF_TOTAL_ON_ON.npy')
+#     BIG_ERCs_SF_SUR_TOTAL_ON = np.load(dir_big + '/BIG_ERCs_SF_SUR_TOTAL_ON_ON.npy')
+#     BIG_ERCs_SF_TOTAL_ON = np.delete(BIG_ERCs_SF_TOTAL_ON, 0, axis=0)
+#     BIG_ERCs_SF_SUR_TOTAL_ON = np.delete(BIG_ERCs_SF_SUR_TOTAL_ON, 0, axis=0)
 
-    nb_perm = 1000
-    path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/perm/'
-    processes = 10
+#     nb_perm = 1000
+#     # path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/perm/'
+#     path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/revision/revision_perm/'
+#     processes = 10
 
-    RDN_p_SF_TOTAL = cluster(BIG_ERCs_SF_TOTAL, BIG_ERCs_SF_SUR_TOTAL, nb_perm, processes)
-    np.save(path + 'RDN_p_SF_TOTAL.npy', RDN_p_SF_TOTAL)
+#     RDN_p_SF_TOTAL_ON = cluster(BIG_ERCs_SF_TOTAL_ON, BIG_ERCs_SF_SUR_TOTAL_ON, nb_perm, processes)
+#     np.save(path + 'RDN_p_SF_TOTAL_ON.npy', RDN_p_SF_TOTAL_ON)
 
 #SF PLA
 if __name__ == "__main__":
@@ -103,18 +112,20 @@ if __name__ == "__main__":
     padd = 0
     frame_rate = 100
     window_size_samples = window_size * frame_rate
-    dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/BIG/'
-    BIG_ERCs_SF_PLA = np.load(dir_big + '/BIG_ERCs_SF_PLA.npy')
-    BIG_ERCs_SF_SUR_PLA = np.load(dir_big + '/BIG_ERCs_SF_SUR_PLA.npy')
-    BIG_ERCs_SF_PLA = np.delete(BIG_ERCs_SF_PLA, 0, axis=0)
-    BIG_ERCs_SF_SUR_PLA = np.delete(BIG_ERCs_SF_SUR_PLA, 0, axis=0)
+    # dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/BIG/'
+    dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/revision/revision_npy_BIG_onsets/' #revision path
+    BIG_ERCs_SF_PLA_ON = np.load(dir_big + 'BIG_ERCs_SF_PLA_ON.npy')
+    BIG_ERCs_SF_SUR_PLA_ON = np.load(dir_big + 'BIG_ERCs_SF_SUR_PLA_ON.npy')
+    BIG_ERCs_SF_PLA_ON = np.delete(BIG_ERCs_SF_PLA_ON, 0, axis=0)
+    BIG_ERCs_SF_SUR_PLA_ON = np.delete(BIG_ERCs_SF_SUR_PLA_ON, 0, axis=0)
 
     nb_perm = 1000
-    path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/perm/'
-    processes = 12
+    # path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/perm/'
+    path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/revision/revision_perm/' #revision path
+    processes = 18  #determine on how many cores you run the analysis
 
-    RDN_p_SF_PLA = cluster(BIG_ERCs_SF_PLA, BIG_ERCs_SF_SUR_PLA, nb_perm, processes)
-    np.save(path + 'RDN_p_SF_PLA.npy', RDN_p_SF_PLA)
+    RDN_p_SF_PLA_ON = cluster(BIG_ERCs_SF_PLA_ON, BIG_ERCs_SF_SUR_PLA_ON, nb_perm, processes)
+    np.save(path + 'RDN_p_SF_PLA_ON.npy', RDN_p_SF_PLA_ON)
 
 #SF LUL
 if __name__ == "__main__":
@@ -122,40 +133,42 @@ if __name__ == "__main__":
     padd = 0
     frame_rate = 100
     window_size_samples = window_size * frame_rate
-    dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/BIG/'
-    BIG_ERCs_SF_LUL = np.load(dir_big + '/BIG_ERCs_SF_LUL.npy')
-    BIG_ERCs_SF_SUR_LUL = np.load(dir_big + '/BIG_ERCs_SF_SUR_LUL.npy')
-    BIG_ERCs_SF_LUL = np.delete(BIG_ERCs_SF_LUL, 0, axis=0)
-    BIG_ERCs_SF_SUR_LUL = np.delete(BIG_ERCs_SF_SUR_LUL, 0, axis=0)
+    # dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/BIG/'
+    dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/revision/revision_npy_BIG_onsets/' #revision path
+    BIG_ERCs_SF_LUL_ON = np.load(dir_big + 'BIG_ERCs_SF_LUL_ON.npy')
+    BIG_ERCs_SF_SUR_LUL_ON = np.load(dir_big + 'BIG_ERCs_SF_SUR_LUL_ON.npy')
+    BIG_ERCs_SF_LUL_ON = np.delete(BIG_ERCs_SF_LUL_ON, 0, axis=0)
+    BIG_ERCs_SF_SUR_LUL_ON = np.delete(BIG_ERCs_SF_SUR_LUL_ON, 0, axis=0)
 
     nb_perm = 1000
-    path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/perm/'
-    processes = 12
+    # path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/perm/'
+    path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/revision/revision_perm/' #revision path
+    processes = 18
 
-    RDN_p_SF_LUL = cluster(BIG_ERCs_SF_LUL, BIG_ERCs_SF_SUR_LUL, nb_perm, processes)
-    np.save(path + 'RDN_p_SF_LUL.npy', RDN_p_SF_LUL)
+    RDN_p_SF_LUL_ON = cluster(BIG_ERCs_SF_LUL_ON, BIG_ERCs_SF_SUR_LUL_ON, nb_perm, processes)
+    np.save(path + 'RDN_p_SF_LUL_ON.npy', RDN_p_SF_LUL_ON)
 
 
 ''' env '''
 
-#env TOTAL
-if __name__ == "__main__":
-    window_size = 5
-    padd = 0
-    frame_rate = 100
-    window_size_samples = window_size * frame_rate
-    dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/BIG/'
-    BIG_ERCs_env_TOTAL = np.load(dir_big + '/BIG_ERCs_env_TOTAL.npy')
-    BIG_ERCs_env_SUR_TOTAL = np.load(dir_big + '/BIG_ERCs_env_SUR_TOTAL.npy')
-    BIG_ERCs_env_TOTAL = np.delete(BIG_ERCs_env_TOTAL, 0, axis=0)
-    BIG_ERCs_env_SUR_TOTAL = np.delete(BIG_ERCs_env_SUR_TOTAL, 0, axis=0)
+# #env TOTAL
+# if __name__ == "__main__":
+#     window_size = 5
+#     padd = 0
+#     frame_rate = 100
+#     window_size_samples = window_size * frame_rate
+#     dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/BIG/'
+#     BIG_ERCs_env_TOTAL = np.load(dir_big + '/BIG_ERCs_env_TOTAL.npy')
+#     BIG_ERCs_env_SUR_TOTAL = np.load(dir_big + '/BIG_ERCs_env_SUR_TOTAL.npy')
+#     BIG_ERCs_env_TOTAL = np.delete(BIG_ERCs_env_TOTAL, 0, axis=0)
+#     BIG_ERCs_env_SUR_TOTAL = np.delete(BIG_ERCs_env_SUR_TOTAL, 0, axis=0)
 
-    nb_perm = 1000
-    path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/perm/'
-    processes = 12
+#     nb_perm = 1000
+#     path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/perm/'
+#     processes = 12
 
-    RDN_p_env_TOTAL = cluster(BIG_ERCs_env_TOTAL, BIG_ERCs_env_SUR_TOTAL, nb_perm, processes)
-    np.save(path + 'RDN_p_env_TOTAL.npy', RDN_p_env_TOTAL)
+#     RDN_p_env_TOTAL = cluster(BIG_ERCs_env_TOTAL, BIG_ERCs_env_SUR_TOTAL, nb_perm, processes)
+#     np.save(path + 'RDN_p_env_TOTAL.npy', RDN_p_env_TOTAL)
 
 #env PLA
 if __name__ == "__main__":
@@ -163,18 +176,20 @@ if __name__ == "__main__":
     padd = 0
     frame_rate = 100
     window_size_samples = window_size * frame_rate
-    dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/BIG/'
-    BIG_ERCs_env_PLA = np.load(dir_big + '/BIG_ERCs_env_PLA.npy')
-    BIG_ERCs_env_SUR_PLA = np.load(dir_big + '/BIG_ERCs_env_SUR_PLA.npy')
-    BIG_ERCs_env_PLA = np.delete(BIG_ERCs_env_PLA, 0, axis=0)
-    BIG_ERCs_env_SUR_PLA = np.delete(BIG_ERCs_env_SUR_PLA, 0, axis=0)
+    # dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/BIG/'
+    dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/revision/revision_npy_BIG_onsets/' #revision path
+    BIG_ERCs_env_PLA_ON = np.load(dir_big + 'BIG_ERCs_env_PLA_ON.npy')
+    BIG_ERCs_env_SUR_PLA_ON = np.load(dir_big + 'BIG_ERCs_env_SUR_PLA_ON.npy')
+    BIG_ERCs_env_PLA_ON = np.delete(BIG_ERCs_env_PLA_ON, 0, axis=0)
+    BIG_ERCs_env_SUR_PLA_ON = np.delete(BIG_ERCs_env_SUR_PLA_ON, 0, axis=0)
 
     nb_perm = 1000
-    path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/perm/'
-    processes = 12
+    # path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/perm/'
+    path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/revision/revision_perm/' #revision path
+    processes = 18
 
-    RDN_p_env_PLA = cluster(BIG_ERCs_env_PLA, BIG_ERCs_env_SUR_PLA, nb_perm, processes)
-    np.save(path + 'RDN_p_env_PLA.npy', RDN_p_env_PLA)
+    RDN_p_env_PLA_ON = cluster(BIG_ERCs_env_PLA_ON, BIG_ERCs_env_SUR_PLA_ON, nb_perm, processes)
+    np.save(path + 'RDN_p_env_PLA_ON.npy', RDN_p_env_PLA_ON)
 
 #env LUL
 if __name__ == "__main__":
@@ -182,42 +197,44 @@ if __name__ == "__main__":
     padd = 0
     frame_rate = 100
     window_size_samples = window_size * frame_rate
-    dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/BIG/'
-    BIG_ERCs_env_LUL = np.load(dir_big + '/BIG_ERCs_env_LUL.npy')
-    BIG_ERCs_env_SUR_LUL = np.load(dir_big + '/BIG_ERCs_env_SUR_LUL.npy')
-    BIG_ERCs_env_LUL = np.delete(BIG_ERCs_env_LUL, 0, axis=0)
-    BIG_ERCs_env_SUR_LUL = np.delete(BIG_ERCs_env_SUR_LUL, 0, axis=0)
+    # dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/BIG/'
+    dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/revision/revision_npy_BIG_onsets/' #revision path
+    BIG_ERCs_env_LUL_ON = np.load(dir_big + 'BIG_ERCs_env_LUL_ON.npy')
+    BIG_ERCs_env_SUR_LUL_ON = np.load(dir_big + 'BIG_ERCs_env_SUR_LUL_ON.npy')
+    BIG_ERCs_env_LUL_ON = np.delete(BIG_ERCs_env_LUL_ON, 0, axis=0)
+    BIG_ERCs_env_SUR_LUL_ON = np.delete(BIG_ERCs_env_SUR_LUL_ON, 0, axis=0)
 
     nb_perm = 1000
-    path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/perm/'
-    processes = 12
+    # path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/perm/'
+    path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/revision/revision_perm/' #revision path
+    processes = 18
 
-    RDN_p_env_LUL = cluster(BIG_ERCs_env_LUL, BIG_ERCs_env_SUR_LUL, nb_perm, processes)
-    np.save(path + 'RDN_p_env_LUL.npy', RDN_p_env_LUL)
+    RDN_p_env_LUL_ON = cluster(BIG_ERCs_env_LUL_ON, BIG_ERCs_env_SUR_LUL_ON, nb_perm, processes)
+    np.save(path + 'RDN_p_env_LUL_ON.npy', RDN_p_env_LUL_ON)
 
 
 
 
 ''' F0 '''
 
-#F0 TOTAL
-if __name__ == "__main__":
-    window_size = 5
-    padd = 0
-    frame_rate = 100
-    window_size_samples = window_size * frame_rate
-    dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/BIG/'
-    BIG_ERCs_F0_TOTAL = np.load(dir_big + '/BIG_ERCs_F0_TOTAL.npy')
-    BIG_ERCs_F0_SUR_TOTAL = np.load(dir_big + '/BIG_ERCs_F0_SUR_TOTAL.npy')
-    BIG_ERCs_F0_TOTAL = np.delete(BIG_ERCs_F0_TOTAL, 0, axis=0)
-    BIG_ERCs_F0_SUR_TOTAL = np.delete(BIG_ERCs_F0_SUR_TOTAL, 0, axis=0)
+# #F0 TOTAL
+# if __name__ == "__main__":
+#     window_size = 5
+#     padd = 0
+#     frame_rate = 100
+#     window_size_samples = window_size * frame_rate
+#     dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/BIG/'
+#     BIG_ERCs_F0_TOTAL = np.load(dir_big + '/BIG_ERCs_F0_TOTAL.npy')
+#     BIG_ERCs_F0_SUR_TOTAL = np.load(dir_big + '/BIG_ERCs_F0_SUR_TOTAL.npy')
+#     BIG_ERCs_F0_TOTAL = np.delete(BIG_ERCs_F0_TOTAL, 0, axis=0)
+#     BIG_ERCs_F0_SUR_TOTAL = np.delete(BIG_ERCs_F0_SUR_TOTAL, 0, axis=0)
 
-    nb_perm = 1000
-    path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/perm/'
-    processes = 12
+#     nb_perm = 1000
+#     path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/perm/'
+#     processes = 12
 
-    RDN_p_F0_TOTAL = cluster(BIG_ERCs_F0_TOTAL, BIG_ERCs_F0_SUR_TOTAL, nb_perm, processes)
-    np.save(path + 'RDN_p_F0_TOTAL.npy', RDN_p_F0_TOTAL)
+#     RDN_p_F0_TOTAL = cluster(BIG_ERCs_F0_TOTAL, BIG_ERCs_F0_SUR_TOTAL, nb_perm, processes)
+#     np.save(path + 'RDN_p_F0_TOTAL.npy', RDN_p_F0_TOTAL)
 
 #F0 PLA
 if __name__ == "__main__":
@@ -225,18 +242,20 @@ if __name__ == "__main__":
     padd = 0
     frame_rate = 100
     window_size_samples = window_size * frame_rate
-    dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/BIG/'
-    BIG_ERCs_F0_PLA = np.load(dir_big + '/BIG_ERCs_F0_PLA.npy')
-    BIG_ERCs_F0_SUR_PLA = np.load(dir_big + '/BIG_ERCs_F0_SUR_PLA.npy')
-    BIG_ERCs_F0_PLA = np.delete(BIG_ERCs_F0_PLA, 0, axis=0)
-    BIG_ERCs_F0_SUR_PLA = np.delete(BIG_ERCs_F0_SUR_PLA, 0, axis=0)
+    # dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/BIG/'
+    dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/revision/revision_npy_BIG_onsets/' #revision path
+    BIG_ERCs_F0_PLA_ON = np.load(dir_big + 'BIG_ERCs_F0_PLA_ON.npy')
+    BIG_ERCs_F0_SUR_PLA_ON = np.load(dir_big + 'BIG_ERCs_F0_SUR_PLA_ON.npy')
+    BIG_ERCs_F0_PLA_ON = np.delete(BIG_ERCs_F0_PLA_ON, 0, axis=0)
+    BIG_ERCs_F0_SUR_PLA_ON = np.delete(BIG_ERCs_F0_SUR_PLA_ON, 0, axis=0)
 
     nb_perm = 1000
-    path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/perm/'
-    processes = 12
+    # path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/perm/'
+    path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/revision/revision_perm/' #revision path
+    processes = 18
 
-    RDN_p_F0_PLA = cluster(BIG_ERCs_F0_PLA, BIG_ERCs_F0_SUR_PLA, nb_perm, processes)
-    np.save(path + 'RDN_p_F0_PLA.npy', RDN_p_F0_PLA)
+    RDN_p_F0_PLA_ON = cluster(BIG_ERCs_F0_PLA_ON, BIG_ERCs_F0_SUR_PLA_ON, nb_perm, processes)
+    np.save(path + 'RDN_p_F0_PLA_ON.npy', RDN_p_F0_PLA_ON)
 
 #F0 LUL
 if __name__ == "__main__":
@@ -244,15 +263,17 @@ if __name__ == "__main__":
     padd = 0
     frame_rate = 100
     window_size_samples = window_size * frame_rate
-    dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/BIG/'
-    BIG_ERCs_F0_LUL = np.load(dir_big + '/BIG_ERCs_F0_LUL.npy')
-    BIG_ERCs_F0_SUR_LUL = np.load(dir_big + '/BIG_ERCs_F0_SUR_LUL.npy')
-    BIG_ERCs_F0_LUL = np.delete(BIG_ERCs_F0_LUL, 0, axis=0)
-    BIG_ERCs_F0_SUR_LUL = np.delete(BIG_ERCs_F0_SUR_LUL, 0, axis=0)
+    # dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/BIG/'
+    dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/revision/revision_npy_BIG_onsets/' #revision path
+    BIG_ERCs_F0_LUL_ON = np.load(dir_big + 'BIG_ERCs_F0_LUL_ON.npy')
+    BIG_ERCs_F0_SUR_LUL_ON = np.load(dir_big + 'BIG_ERCs_F0_SUR_LUL_ON.npy')
+    BIG_ERCs_F0_LUL_ON = np.delete(BIG_ERCs_F0_LUL_ON, 0, axis=0)
+    BIG_ERCs_F0_SUR_LUL_ON = np.delete(BIG_ERCs_F0_SUR_LUL_ON, 0, axis=0)
 
     nb_perm = 1000
-    path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/perm/'
-    processes = 12
+    # path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/perm/'
+    path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/revision/revision_perm/' #revision path
+    processes = 18
 
-    RDN_p_F0_LUL = cluster(BIG_ERCs_F0_LUL, BIG_ERCs_F0_SUR_LUL, nb_perm, processes)
-    np.save(path + 'RDN_p_F0_LUL.npy', RDN_p_F0_LUL)
+    RDN_p_F0_LUL_ON = cluster(BIG_ERCs_F0_LUL_ON, BIG_ERCs_F0_SUR_LUL_ON, nb_perm, processes)
+    np.save(path + 'RDN_p_F0_LUL_ON.npy', RDN_p_F0_LUL_ON)
