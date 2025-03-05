@@ -93,8 +93,8 @@ os.cpu_count()
 #     window_size_samples = window_size * frame_rate
 #     # dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/BIG/'
 #     dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/revision/revision_npy_BIG_onsets/'
-#     BIG_ERCs_SF_TOTAL_ON = np.load(dir_big + '/BIG_ERCs_SF_TOTAL_ON_ON.npy')
-#     BIG_ERCs_SF_SUR_TOTAL_ON = np.load(dir_big + '/BIG_ERCs_SF_SUR_TOTAL_ON_ON.npy')
+#     BIG_ERCs_SF_TOTAL_ON = np.load(dir_big + '/BIG_ERCs_SF_TOTAL_ON.npy')
+#     BIG_ERCs_SF_SUR_TOTAL_ON = np.load(dir_big + '/BIG_ERCs_SF_SUR_TOTAL_ON.npy')
 #     BIG_ERCs_SF_TOTAL_ON = np.delete(BIG_ERCs_SF_TOTAL_ON, 0, axis=0)
 #     BIG_ERCs_SF_SUR_TOTAL_ON = np.delete(BIG_ERCs_SF_SUR_TOTAL_ON, 0, axis=0)
 
@@ -122,7 +122,7 @@ if __name__ == "__main__":
     nb_perm = 1000
     # path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/new_npy_files/perm/'
     path = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/revision/revision_perm/' #revision path
-    processes = 18  #determine on how many cores you run the analysis
+    processes = 10  #determine on how many cores you run the analysis
 
     RDN_p_SF_PLA_ON = cluster(BIG_ERCs_SF_PLA_ON, BIG_ERCs_SF_SUR_PLA_ON, nb_perm, processes)
     np.save(path + 'RDN_p_SF_PLA_ON.npy', RDN_p_SF_PLA_ON)

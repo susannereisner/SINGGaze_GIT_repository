@@ -111,14 +111,25 @@ def gen_ERC(time_serie, look_onsets, window_size):
         ##
 
         # if ERC is not empty
-        if (abs(np.sum(ERC)) > 0.0001):
+        # commented 03/03/2025
+        # if (abs(np.sum(ERC)) > 0.0001):
+        #     # resize ERC to be 600samples (time streatching occurs here)
+        #     #if look is valid
+        #     if ((len(ERC) == window_size_samples * 2) and (get_look_validity(ERC))):
+        #         #stack the present ERC with the previosu ones
+        #         ERCs = np.vstack((ERCs, ERC))
+        #     else:
+        #         print("Size or validity is NOT correct")
             # resize ERC to be 600samples (time streatching occurs here)
             #if look is valid
-            if ((len(ERC) == window_size_samples * 2) and (get_look_validity(ERC))):
-                #stack the present ERC with the previosu ones
-                ERCs = np.vstack((ERCs, ERC))
-            else:
-                print("Size or validity is NOT correct")
+            
+            
+        if ((len(ERC) == window_size_samples * 2) and (get_look_validity(ERC))):
+            #stack the present ERC with the previosu ones
+            ERCs = np.vstack((ERCs, ERC))
+        # else:
+        #     print("Size or validity is NOT correct")
+
     if (len(ERCs.shape)>1):
         #remove first initialised (empty) ERCs line
         ERCs = np.delete(ERCs, (0), axis=0)    
@@ -224,24 +235,24 @@ BIG_ERCs_SF_PLA = np.zeros(2*window_size_samples)
 BIG_ERCs_SF_SUR_PLA = np.zeros(2*window_size_samples)
 BIG_ERCs_SF_LUL = np.zeros(2*window_size_samples)
 BIG_ERCs_SF_SUR_LUL = np.zeros(2*window_size_samples)
-BIG_ERCs_SF_TOTAL = np.zeros(2*window_size_samples)
-BIG_ERCs_SF_SUR_TOTAL = np.zeros(2*window_size_samples)
+# BIG_ERCs_SF_TOTAL = np.zeros(2*window_size_samples)
+# BIG_ERCs_SF_SUR_TOTAL = np.zeros(2*window_size_samples)
 
 ## envelope initialised
 BIG_ERCs_env_PLA = np.zeros(2*window_size_samples)
 BIG_ERCs_env_SUR_PLA = np.zeros(2*window_size_samples)
 BIG_ERCs_env_LUL = np.zeros(2*window_size_samples)
 BIG_ERCs_env_SUR_LUL = np.zeros(2*window_size_samples)
-BIG_ERCs_env_TOTAL = np.zeros(2*window_size_samples)
-BIG_ERCs_env_SUR_TOTAL = np.zeros(2*window_size_samples)
+# BIG_ERCs_env_TOTAL = np.zeros(2*window_size_samples)
+# BIG_ERCs_env_SUR_TOTAL = np.zeros(2*window_size_samples)
 
 ## F0 initialised
 BIG_ERCs_F0_PLA = np.zeros(2*window_size_samples)
 BIG_ERCs_F0_SUR_PLA = np.zeros(2*window_size_samples)
 BIG_ERCs_F0_LUL = np.zeros(2*window_size_samples)
 BIG_ERCs_F0_SUR_LUL = np.zeros(2*window_size_samples)
-BIG_ERCs_F0_TOTAL = np.zeros(2*window_size_samples)
-BIG_ERCs_F0_SUR_TOTAL = np.zeros(2*window_size_samples)
+# BIG_ERCs_F0_TOTAL = np.zeros(2*window_size_samples)
+# BIG_ERCs_F0_SUR_TOTAL = np.zeros(2*window_size_samples)
 
 
 # #output directory for csv files
@@ -256,6 +267,8 @@ BIG_ERCs_F0_SUR_TOTAL = np.zeros(2*window_size_samples)
 output_dir = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/revision/revision_csv/'
 output_dir_big = 'W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/revision/revision_npy_BIG_onsets/'
 
+size_total_looks_pla = 0
+size_total_looks_lul = 0
 
 for ppt_id in ppt_id_list:
 
@@ -281,6 +294,13 @@ for ppt_id in ppt_id_list:
 
     look_file =  ppt_id + '_mum.xlsx'
     looks_pla, looks_lul = get_look_list(path_look_file + look_file)
+    size_total_looks_pla = size_total_looks_pla + len(looks_pla)
+    print("len(looks_pla) = ", len(looks_pla))
+    print("size_total_looks_pla = ", size_total_looks_pla)
+    size_total_looks_lul = size_total_looks_lul + len(looks_lul)
+    print("len(looks_lul) = ", len(looks_lul))
+    print("size_total_looks_lul = ", size_total_looks_lul)
+    
 
     start_pla,end_pla, start_lul, end_lul = get_onset_songs(df_start_end,ppt_id)
     start_pla = int(start_pla)
@@ -359,10 +379,10 @@ for ppt_id in ppt_id_list:
         
         #SF
         print("real looks")
-        # genrate ERC using Spectral FLux, the organic looks and the window size of interest.
+        # generate ERC using Spectral FLux, the organic looks and the window size of interest.
         ERC_SF_PLA = gen_ERC(SF,looks_pla,window_size)
         print("Surrogate looks")
-        # generate the SURrogate ERC using the same function but with the SURrogate looks
+        # generate the surrogate ERC using the same function but with the surrogate looks
         ERC_SF_SUR_PLA = gen_ERC(SF,looks_pla_SUR,window_size)
 
         ERC_SF_SUR_PLA = np.vstack((ERC_SF_SUR_PLA, ERC_SF_SUR_PLA))
@@ -376,8 +396,8 @@ for ppt_id in ppt_id_list:
         BIG_ERCs_SF_PLA = np.vstack((BIG_ERCs_SF_PLA, ERC_SF_PLA))
         BIG_ERCs_SF_SUR_PLA = np.vstack((BIG_ERCs_SF_SUR_PLA, ERC_SF_SUR_PLA))
     
-        BIG_ERCs_SF_TOTAL = np.vstack((BIG_ERCs_SF_TOTAL, ERC_SF_PLA))
-        BIG_ERCs_SF_SUR_TOTAL = np.vstack((BIG_ERCs_SF_SUR_TOTAL, ERC_SF_SUR_PLA))
+        # BIG_ERCs_SF_TOTAL = np.vstack((BIG_ERCs_SF_TOTAL, ERC_SF_PLA))
+        # BIG_ERCs_SF_SUR_TOTAL = np.vstack((BIG_ERCs_SF_SUR_TOTAL, ERC_SF_SUR_PLA))
     
         ## ENV
         ERC_env_PLA = gen_ERC(env,looks_pla,window_size)
@@ -391,8 +411,8 @@ for ppt_id in ppt_id_list:
         BIG_ERCs_env_PLA = np.vstack((BIG_ERCs_env_PLA, ERC_env_PLA))
         BIG_ERCs_env_SUR_PLA = np.vstack((BIG_ERCs_env_SUR_PLA, ERC_env_SUR_PLA))
 
-        BIG_ERCs_env_TOTAL = np.vstack((BIG_ERCs_env_TOTAL, ERC_env_PLA))
-        BIG_ERCs_env_SUR_TOTAL = np.vstack((BIG_ERCs_env_SUR_TOTAL, ERC_env_SUR_PLA))
+        # BIG_ERCs_env_TOTAL = np.vstack((BIG_ERCs_env_TOTAL, ERC_env_PLA))
+        # BIG_ERCs_env_SUR_TOTAL = np.vstack((BIG_ERCs_env_SUR_TOTAL, ERC_env_SUR_PLA))
 
         #F0
         ERC_F0_PLA = gen_ERC(F0,looks_pla,window_size)
@@ -407,8 +427,8 @@ for ppt_id in ppt_id_list:
         BIG_ERCs_F0_PLA = np.vstack((BIG_ERCs_F0_PLA, ERC_F0_PLA))
         BIG_ERCs_F0_SUR_PLA = np.vstack((BIG_ERCs_F0_SUR_PLA, ERC_F0_SUR_PLA))
     
-        BIG_ERCs_F0_TOTAL = np.vstack((BIG_ERCs_F0_TOTAL, ERC_F0_PLA))
-        BIG_ERCs_F0_SUR_TOTAL = np.vstack((BIG_ERCs_F0_SUR_TOTAL, ERC_F0_SUR_PLA))
+        # BIG_ERCs_F0_TOTAL = np.vstack((BIG_ERCs_F0_TOTAL, ERC_F0_PLA))
+        # BIG_ERCs_F0_SUR_TOTAL = np.vstack((BIG_ERCs_F0_SUR_TOTAL, ERC_F0_SUR_PLA))
 
 
     if (len(looks_lul) >= 1):
@@ -429,8 +449,8 @@ for ppt_id in ppt_id_list:
         BIG_ERCs_SF_LUL = np.vstack((BIG_ERCs_SF_LUL, ERC_SF_LUL))
         BIG_ERCs_SF_SUR_LUL = np.vstack((BIG_ERCs_SF_SUR_LUL, ERC_SF_SUR_LUL))
     
-        BIG_ERCs_SF_TOTAL = np.vstack((BIG_ERCs_SF_TOTAL, ERC_SF_LUL))
-        BIG_ERCs_SF_SUR_TOTAL = np.vstack((BIG_ERCs_SF_SUR_TOTAL, ERC_SF_SUR_LUL))
+        # BIG_ERCs_SF_TOTAL = np.vstack((BIG_ERCs_SF_TOTAL, ERC_SF_LUL))
+        # BIG_ERCs_SF_SUR_TOTAL = np.vstack((BIG_ERCs_SF_SUR_TOTAL, ERC_SF_SUR_LUL))
     
 
         ## ENV
@@ -445,8 +465,8 @@ for ppt_id in ppt_id_list:
         BIG_ERCs_env_LUL = np.vstack((BIG_ERCs_env_LUL, ERC_env_LUL))
         BIG_ERCs_env_SUR_LUL = np.vstack((BIG_ERCs_env_SUR_LUL, ERC_env_SUR_LUL))
 
-        BIG_ERCs_env_TOTAL = np.vstack((BIG_ERCs_env_TOTAL, ERC_env_LUL))
-        BIG_ERCs_env_SUR_TOTAL = np.vstack((BIG_ERCs_env_SUR_TOTAL, ERC_env_SUR_LUL))
+        # BIG_ERCs_env_TOTAL = np.vstack((BIG_ERCs_env_TOTAL, ERC_env_LUL))
+        # BIG_ERCs_env_SUR_TOTAL = np.vstack((BIG_ERCs_env_SUR_TOTAL, ERC_env_SUR_LUL))
 
         #F0
         ERC_F0_LUL = gen_ERC(F0,looks_lul,window_size)
@@ -460,8 +480,8 @@ for ppt_id in ppt_id_list:
         BIG_ERCs_F0_LUL = np.vstack((BIG_ERCs_F0_LUL, ERC_F0_LUL))
         BIG_ERCs_F0_SUR_LUL = np.vstack((BIG_ERCs_F0_SUR_LUL, ERC_F0_SUR_LUL))
     
-        BIG_ERCs_F0_TOTAL = np.vstack((BIG_ERCs_F0_TOTAL, ERC_F0_LUL))
-        BIG_ERCs_F0_SUR_TOTAL = np.vstack((BIG_ERCs_F0_SUR_TOTAL, ERC_F0_SUR_LUL))
+        # BIG_ERCs_F0_TOTAL = np.vstack((BIG_ERCs_F0_TOTAL, ERC_F0_LUL))
+        # BIG_ERCs_F0_SUR_TOTAL = np.vstack((BIG_ERCs_F0_SUR_TOTAL, ERC_F0_SUR_LUL))
 
     print('shape of BIG_ERCs_SF_PLA = ' , np.shape(BIG_ERCs_SF_PLA))
     print('shape of BIG_ERCs_SF_SUR_PLA = ' , np.shape(BIG_ERCs_SF_SUR_PLA))
@@ -472,6 +492,12 @@ for ppt_id in ppt_id_list:
     print('shape of BIG_ERCs_env_SUR_PLA = ' , np.shape(BIG_ERCs_env_SUR_PLA))
     print('shape of BIG_ERCs_env_LUL = ' , np.shape(BIG_ERCs_env_LUL))
     print('shape of BIG_ERCs_env_SUR_LUL = ' , np.shape(BIG_ERCs_env_SUR_LUL))
+    
+    print('shape of BIG_ERCs_F0_PLA = ' , np.shape(BIG_ERCs_F0_PLA))
+    print('shape of BIG_ERCs_F0_SUR_PLA = ' , np.shape(BIG_ERCs_F0_SUR_PLA))
+    print('shape of BIG_ERCs_F0_LUL = ' , np.shape(BIG_ERCs_F0_LUL))
+    print('shape of BIG_ERCs_F0_SUR_LUL = ' , np.shape(BIG_ERCs_F0_SUR_LUL))
+
 
 
 
@@ -483,8 +509,8 @@ np.save(output_dir_big+"BIG_ERCs_SF_SUR_PLA_ON.npy", BIG_ERCs_SF_SUR_PLA[:])
 np.save(output_dir_big+"BIG_ERCs_SF_LUL_ON.npy", BIG_ERCs_SF_LUL[:])
 np.save(output_dir_big+"BIG_ERCs_SF_SUR_LUL_ON.npy", BIG_ERCs_SF_SUR_LUL[:])
 
-np.save(output_dir_big+"BIG_ERCs_SF_TOTAL_ON.npy", BIG_ERCs_SF_TOTAL[:])
-np.save(output_dir_big+"BIG_ERCs_SF_SUR_TOTAL_ON.npy", BIG_ERCs_SF_SUR_TOTAL[:])
+# np.save(output_dir_big+"BIG_ERCs_SF_TOTAL_ON.npy", BIG_ERCs_SF_TOTAL[:])
+# np.save(output_dir_big+"BIG_ERCs_SF_SUR_TOTAL_ON.npy", BIG_ERCs_SF_SUR_TOTAL[:])
 
 
 
@@ -494,8 +520,8 @@ np.save(output_dir_big+"BIG_ERCs_env_SUR_PLA_ON.npy", BIG_ERCs_env_SUR_PLA)
 np.save(output_dir_big+"BIG_ERCs_env_LUL_ON.npy", BIG_ERCs_env_LUL)
 np.save(output_dir_big+"BIG_ERCs_env_SUR_LUL_ON.npy", BIG_ERCs_env_SUR_LUL)
 
-np.save(output_dir_big+"BIG_ERCs_env_TOTAL_ON.npy", BIG_ERCs_env_TOTAL)
-np.save(output_dir_big+"BIG_ERCs_env_SUR_TOTAL_ON.npy", BIG_ERCs_env_SUR_TOTAL)
+# np.save(output_dir_big+"BIG_ERCs_env_TOTAL_ON.npy", BIG_ERCs_env_TOTAL)
+# np.save(output_dir_big+"BIG_ERCs_env_SUR_TOTAL_ON.npy", BIG_ERCs_env_SUR_TOTAL)
 
 
 
@@ -505,7 +531,7 @@ np.save(output_dir_big+"BIG_ERCs_F0_SUR_PLA_ON.npy", BIG_ERCs_F0_SUR_PLA)
 np.save(output_dir_big+"BIG_ERCs_F0_LUL_ON.npy", BIG_ERCs_F0_LUL)
 np.save(output_dir_big+"BIG_ERCs_F0_SUR_LUL_ON.npy", BIG_ERCs_F0_SUR_LUL)
 
-np.save(output_dir_big+"BIG_ERCs_F0_TOTAL_ON.npy", BIG_ERCs_F0_TOTAL)
-np.save(output_dir_big+"BIG_ERCs_F0_SUR_TOTAL_ON.npy", BIG_ERCs_F0_SUR_TOTAL)
+# np.save(output_dir_big+"BIG_ERCs_F0_TOTAL_ON.npy", BIG_ERCs_F0_TOTAL)
+# np.save(output_dir_big+"BIG_ERCs_F0_SUR_TOTAL_ON.npy", BIG_ERCs_F0_SUR_TOTAL)
 
 
