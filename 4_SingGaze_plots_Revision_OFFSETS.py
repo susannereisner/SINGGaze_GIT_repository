@@ -231,160 +231,47 @@ p_v_sf_lul_off_times = np.hstack((p_v_sf_lul_off[:, np.newaxis], t_val_sf_lul_of
 # np.save(savepath + "p_v_sf_times_LUL_OFF.npy", p_v_sf_lul_off_times)
 
 
-###### PLOTS POSTER
-#       SF TOTAL
-
-line_width = 4
-line_height = 1.7
-
-# plt.figure(figsize=(10,6))
-# plt.plot(rt, mean_SF_TOTAL, label='Social Gaze', color='#009e74', linewidth = 3)
-# plt.fill_between(rt, np.subtract(mean_SF_TOTAL, sigma_SF_TOTAL), np.add(mean_SF_TOTAL, sigma_SF_TOTAL), alpha=0.1, color='#009e74')
-# plt.plot(rt, mean_SF_SUR_TOTAL, label='Surrogate Gaze', color='#56b4e9', linewidth = 3)
-# plt.fill_between(rt, np.subtract(mean_SF_SUR_TOTAL, sigma_SF_SUR_TOTAL), np.add(mean_SF_SUR_TOTAL, sigma_SF_SUR_TOTAL), alpha=0.1, color='#56b4e9')
-# plt.axvline(x=0, color='black', linestyle='--')
-# plt.plot(rt, line_height * np.mean(BIG_ERCs_SF_TOTAL) * p_v_sf_total, linewidth=line_width, color='#d55e00')
-# plt.xlabel("time relative to infant gaze offset (s)", fontsize = 20)
-# plt.ylabel("Spectral Flux of Playsongs and Lullabies", fontsize = 16)
-# plt.xlim(-5,+5)
-# plt.ylim((130,800))
-# plt.text(0.05, 0.93, "(A)", transform=plt.gca().transAxes, fontsize=12, verticalalignment='bottom')
-# line_social_gaze = plt.Line2D([0], [0], color='#009e74', lw=2, label='Social Gaze')
-# line_surrogate_gaze = plt.Line2D([0], [0], color='#56b4e9', lw=2, label='Surrogate Gaze')
-# line_p_value = plt.Line2D([0], [0], color='#d55e00', lw=2, label='p < Bonferroni-corrected 5th percentile')
-# plt.legend(handles=[line_social_gaze, line_surrogate_gaze, line_p_value], loc='upper right')
-
-# plt.savefig(figpath + 'SF_total_poster.svg')
-
-# plt.show()
-
-#plot pla
-plt.figure(figsize=(10,6))
-plt.plot(rt, mean_SF_PLA_OFF, label='Social Gaze', color='#009e74', linewidth = 3)
-plt.fill_between(rt, np.subtract(mean_SF_PLA_OFF, sigma_SF_PLA_OFF), np.add(mean_SF_PLA_OFF, sigma_SF_PLA_OFF), alpha=0.1, color='#009e74')
-plt.plot(rt, mean_SF_SUR_PLA_OFF, label='Surrogate Gaze', color='#56b4e9', linewidth = 3)
-plt.fill_between(rt, np.subtract(mean_SF_SUR_PLA_OFF, sigma_SF_SUR_PLA_OFF), np.add(mean_SF_SUR_PLA_OFF, sigma_SF_SUR_PLA_OFF), alpha=0.1, color='#56b4e9')
-plt.axvline(x=0, color='black', linestyle='--')
-plt.plot(rt, line_height * np.mean(BIG_ERCs_SF_PLA_OFF) * p_v_sf_pla_off, linewidth=line_width, color='#d55e00')
-plt.xlabel("time relative to infant gaze offset (s)", fontsize = 20)
-plt.ylabel("Spectral Flux of Playsongs", fontsize = 16)
-plt.xlim(-5,+5)
-plt.ylim((130,800))
-plt.text(0.05, 0.93, "(B)", transform=plt.gca().transAxes, fontsize=12, verticalalignment='bottom')
-
-plt.savefig(figpath + 'SF_pla_off_poster.svg')
-
-
-#plot lul
-plt.figure(figsize=(10,6))
-plt.plot(rt, mean_SF_LUL_OFF, label='Social Gaze', color='#009e74', linewidth = 3)
-plt.fill_between(rt, np.subtract(mean_SF_LUL_OFF, sigma_SF_LUL_OFF), np.add(mean_SF_LUL_OFF, sigma_SF_LUL_OFF), alpha=0.1, color='#009e74')
-plt.plot(rt, mean_SF_SUR_LUL_OFF, label='Surrogate Gaze', color='#56b4e9', linewidth = 3)
-plt.fill_between(rt, np.subtract(mean_SF_SUR_LUL_OFF, sigma_SF_SUR_LUL_OFF), np.add(mean_SF_SUR_LUL_OFF, sigma_SF_SUR_LUL_OFF), alpha=0.1, color='#56b4e9')
-plt.axvline(x=0, color='black', linestyle='--')
-plt.plot(rt, line_height * np.mean(BIG_ERCs_SF_LUL_OFF) * p_v_sf_lul_off, linewidth=line_width, color='#d55e00')
-plt.xlabel("time relative to infant gaze offset (s)", fontsize = 20)
-plt.ylabel("Spectral Flux of Lullabies", fontsize = 16)
-plt.xlim(-5,+5)
-plt.ylim((130,800))
-plt.text(0.05, 0.93, "(C)", transform=plt.gca().transAxes, fontsize=12, verticalalignment='bottom')
-plt.savefig(figpath + 'SF_lul_off_poster.svg')
-
-
-
-
-
-
-
-
 
 # ###### PLOTS PAPER
-# #       SF TOTAL
-
-# # plt.figure(figsize=(12,6))
-# # plt.subtitle("Spectral Flux")
-# # plt.subplot(1,3,1)
-# # plt.plot(rt,mean_SF_TOTAL, label = 'SF TOTAL',color='#00887A')
-# # plt.fill_between(rt, np.subtract(mean_SF_TOTAL,sigma_SF_TOTAL), np.add(mean_SF_TOTAL, sigma_SF_TOTAL), alpha = 0.1)
-# # plt.plot(rt,mean_SF_SUR_TOTAL, label = 'SF SUR TOTAL',color='#9E9E9E')
-# # plt.fill_between(rt, np.subtract(mean_SF_SUR_TOTAL,sigma_SF_SUR_TOTAL), np.add(mean_SF_SUR_TOTAL, sigma_SF_SUR_TOTAL), alpha = 0.1)
-# # plt.axvline(x = 0, color = 'black', linestyle = '--')
-# # plt.plot(rt, line_height*np.mean(BIG_ERCs_SF_TOTAL) * p_v_total,linewidth=line_width, color = '#E74926')
-# # plt.xlabel("time relative to infant gaze offset")
-# # plt.ylabel("Spectral Flux")
-# # # plt.ylim((50,310))
-# # plt.legend()
-# # plt.text(0.05, 0.05, "(A)", transform=plt.gca().transAxes, fontsize=12, verticalalignment='bottom')
-
-# #plot pla
-# # plt.figure(figsize=(12,6))
-# # plt.subtitle("Spectral Flux")
-# plt.subplot(1,2,1)
-# plt.plot(rt,mean_SF_PLA_OFF, label='SF PLA', color='#00887A')
-# plt.fill_between(rt, np.subtract(mean_SF_PLA_OFF,sigma_SF_PLA_OFF), np.add(mean_SF_PLA_OFF, sigma_SF_PLA_OFF), alpha=0.1)
-# plt.plot(rt,mean_SF_SUR_PLA_OFF, label='SF SUR PLA', color='#9E9E9E')
-# plt.fill_between(rt, np.subtract(mean_SF_SUR_PLA_OFF,sigma_SF_PLA_OFF), np.add(mean_SF_SUR_PLA_OFF, sigma_SF_PLA_OFF), alpha=0.1)
-# plt.axvline(x=0, color='black', linestyle='--')
-# plt.plot(rt, line_height*np.mean(BIG_ERCs_SF_PLA_OFF) * p_v_sf_pla_off, linewidth=line_width, color='#E74926')
-# plt.xlabel("time relative to infant gaze offset")
-# plt.ylim((50,310))
-# # Adding label "(B)" to bottom left
-# plt.text(0.05, 0.05, "(A)", transform=plt.gca().transAxes, fontsize=12, verticalalignment='bottom')
-# plt.legend(loc='upper right')
-
-
-# #plot lul
-# plt.subplot(1,2,2)
-# plt.plot(rt,mean_SF_LUL_OFF, label = 'SF LUL',color='#00887A')
-# plt.fill_between(rt, np.subtract(mean_SF_LUL_OFF,sigma_SF_LUL_OFF), np.add(mean_SF_LUL_OFF, sigma_SF_LUL_OFF), alpha = 0.1)
-# plt.plot(rt,mean_SF_SUR_LUL_OFF, label = 'SF SUR LUL',color='#9E9E9E')
-# plt.fill_between(rt, np.subtract(mean_SF_SUR_LUL_OFF,sigma_SF_SUR_LUL_OFF), np.add(mean_SF_SUR_LUL_OFF, sigma_SF_SUR_LUL_OFF), alpha = 0.1)
-# plt.axvline(x = 0, color = 'black', linestyle = '--')
-# plt.plot(rt, line_height*np.mean(BIG_ERCs_SF_LUL_OFF) * p_v_sf_lul_off,linewidth=line_width, color = '#E74926')
-# plt.xlabel("time relative to infant gaze offset")
-# plt.ylim((50,310))
-# plt.legend()
-# plt.text(0.05, 0.05, "(B)", transform=plt.gca().transAxes, fontsize=12, verticalalignment='bottom')
-
-
-
-
 line_width = 4
 line_height = 1
 
 fig, axs = plt.subplots(1, 2, figsize=(20, 6))
 
 # Plot Playsongs
-axs[0].plot(rt, mean_SF_PLA_OFF, label='Social Gaze', color='#009e74', linewidth=3)
+axs[0].plot(rt, mean_SF_PLA_OFF, label='Social Gaze Data', color='#009e74', linewidth=3)
 axs[0].fill_between(rt, mean_SF_PLA_OFF - sigma_SF_PLA_OFF, mean_SF_PLA_OFF + sigma_SF_PLA_OFF, alpha=0.1, color='#009e74')
-axs[0].plot(rt, mean_SF_SUR_PLA_OFF, label='Surrogate Gaze', color='#56b4e9', linewidth=3)
+axs[0].plot(rt, mean_SF_SUR_PLA_OFF, label='Surrogate Data', color='#56b4e9', linewidth=3)
 axs[0].fill_between(rt, mean_SF_SUR_PLA_OFF - sigma_SF_SUR_PLA_OFF, mean_SF_SUR_PLA_OFF + sigma_SF_SUR_PLA_OFF, alpha=0.1, color='#56b4e9')
 axs[0].axvline(x=0, color='black', linestyle='--')
 # axs[0].plot(rt, line_height * np.mean(BIG_ERCs_SF_PLA_OFF) * p_v_sf_pla_off, linewidth=line_width, color='#d55e00')
 axs[0].plot(rt, line_height * 750 * p_v_sf_pla_off, linewidth=line_width, color='#d55e00')
-axs[0].set_xlabel("time relative to infant gaze offset (s)", fontsize=20)
-axs[0].set_ylabel("Spectral Flux of Playsongs", fontsize=16)
+axs[0].set_xlabel("Time relative to Infant Gaze Offset (s)", fontsize=20)
+axs[0].set_ylabel("Spectral Flux", fontsize=20)
 axs[0].set_xlim(-5, 5)
 axs[0].set_ylim(130, 850)
-axs[0].text(0.05, 0.93, "(A)", transform=axs[0].transAxes, fontsize=12, verticalalignment='top')
+axs[0].text(0.05, 1.08, "(A)", transform=axs[0].transAxes, fontsize=18, verticalalignment='top')
+axs[0].text(0.05, 0.96, "Playsongs", transform=axs[0].transAxes, fontsize=20, verticalalignment='top')
 
 # Plot Lullabies
-line1, = axs[1].plot(rt, mean_SF_LUL_OFF, label='Social Gaze', color='#009e74', linewidth=3)
+line1, = axs[1].plot(rt, mean_SF_LUL_OFF, label='Social Gaze Data', color='#009e74', linewidth=3)
 axs[1].fill_between(rt, mean_SF_LUL_OFF - sigma_SF_LUL_OFF, mean_SF_LUL_OFF + sigma_SF_LUL_OFF, alpha=0.1, color='#009e74')
-line2, = axs[1].plot(rt, mean_SF_SUR_LUL_OFF, label='Surrogate Gaze', color='#56b4e9', linewidth=3)
+line2, = axs[1].plot(rt, mean_SF_SUR_LUL_OFF, label='Surrogate Data', color='#56b4e9', linewidth=3)
 axs[1].fill_between(rt, mean_SF_SUR_LUL_OFF - sigma_SF_SUR_LUL_OFF, mean_SF_SUR_LUL_OFF + sigma_SF_SUR_LUL_OFF, alpha=0.1, color='#56b4e9')
 axs[1].axvline(x=0, color='black', linestyle='--')
 # line3, = axs[1].plot(rt, line_height * np.mean(BIG_ERCs_SF_LUL_OFF) * p_v_sf_lul_off, label='p<.05/2', linewidth=line_width, color='#d55e00')
-line3, = axs[1].plot(rt, line_height * 400 * p_v_sf_lul_off, label='p<.05/2', linewidth=line_width, color='#d55e00')
+line3, = axs[1].plot(rt, line_height * 400 * p_v_sf_lul_off, label='p < 5th/2 percentile', linewidth=line_width, color='#d55e00')
 
-axs[1].set_xlabel("time relative to infant gaze offset (s)", fontsize=20)
-axs[1].set_ylabel("Spectral Flux of Lullabies", fontsize=16)
+axs[1].set_xlabel("Time relative to Infant Gaze Offset (s)", fontsize=20)
+axs[1].set_ylabel("Spectral Flux", fontsize=20)
 axs[1].set_xlim(-5, 5)
 axs[1].set_ylim(130, 850)
-axs[1].text(0.05, 0.93, "(B)", transform=axs[1].transAxes, fontsize=12, verticalalignment='top')
+axs[1].text(0.05, 1.08, "(B)", transform=axs[1].transAxes, fontsize=18, verticalalignment='top')
+axs[1].text(0.05, 0.96, "Lullabies", transform=axs[1].transAxes, fontsize=20, verticalalignment='top')
 
 # Add legend to the right plot
-axs[1].legend(handles=[line1, line2, line3], fontsize=12, loc='upper right')
+axs[1].legend(handles=[line1, line2, line3], fontsize=14, loc='upper right')
+
 
 # plt.tight_layout()
 # plt.show()
@@ -421,86 +308,51 @@ p_v_env_lul_off_times = np.hstack((p_v_env_lul_off[:, np.newaxis], t_val_env_lul
 
 
 #plots
+
 line_width = 4
 line_height = 1
 
 fig, axs = plt.subplots(1, 2, figsize=(20, 6))
 
 # Plot Playsongs
-axs[0].plot(rt, mean_ENV_PLA_OFF, label='Social Gaze', color='#009e74', linewidth=3)
+axs[0].plot(rt, mean_ENV_PLA_OFF, label='Social Gaze Data', color='#009e74', linewidth=3)
 axs[0].fill_between(rt, mean_ENV_PLA_OFF - sigma_ENV_PLA_OFF, mean_ENV_PLA_OFF + sigma_ENV_PLA_OFF, alpha=0.1, color='#009e74')
-axs[0].plot(rt, mean_ENV_SUR_PLA_OFF, label='Surrogate Gaze', color='#56b4e9', linewidth=3)
+axs[0].plot(rt, mean_ENV_SUR_PLA_OFF, label='Surrogate Data', color='#56b4e9', linewidth=3)
 axs[0].fill_between(rt, mean_ENV_SUR_PLA_OFF - sigma_ENV_SUR_PLA_OFF, mean_ENV_SUR_PLA_OFF + sigma_ENV_SUR_PLA_OFF, alpha=0.1, color='#56b4e9')
 axs[0].axvline(x=0, color='black', linestyle='--')
-# axs[0].plot(rt, line_height * np.mean(BIG_ERCs_ENV_PLA_OFF) * p_v_env_pla_off, linewidth=line_width, color='#d55e00')
-axs[0].plot(rt, line_height * 180 * p_v_env_pla_off, linewidth=line_width, color='#d55e00')
-axs[0].set_xlabel("time relative to infant gaze offset (s)", fontsize=20)
-axs[0].set_ylabel("Amplitude Envelope of Playsongs", fontsize=16)
+# axs[0].plot(rt, line_height * np.mean(BIG_ERCs_SF_PLA_OFF) * p_v_sf_pla_off, linewidth=line_width, color='#d55e00')
+axs[0].plot(rt, line_height * 170 * p_v_env_pla_off, linewidth=line_width, color='#d55e00')
+axs[0].set_xlabel("Time relative to Infant Gaze Offset (s)", fontsize=20)
+axs[0].set_ylabel("Amplitude Envelope", fontsize=20)
 axs[0].set_xlim(-5, 5)
 axs[0].set_ylim(80, 190)
-axs[0].text(0.05, 0.97, "(A)", transform=axs[0].transAxes, fontsize=12, verticalalignment='top')
+axs[0].text(0.05, 1.08, "(A)", transform=axs[0].transAxes, fontsize=18, verticalalignment='top')
+axs[0].text(0.05, 0.96, "Playsongs", transform=axs[0].transAxes, fontsize=20, verticalalignment='top')
 
 # Plot Lullabies
-line_height = 1.24
-
-axs[1].plot(rt, mean_ENV_LUL_OFF, label='Social Gaze', color='#009e74', linewidth=3)
+line1, = axs[1].plot(rt, mean_ENV_LUL_OFF, label='Social Gaze Data', color='#009e74', linewidth=3)
 axs[1].fill_between(rt, mean_ENV_LUL_OFF - sigma_ENV_LUL_OFF, mean_ENV_LUL_OFF + sigma_ENV_LUL_OFF, alpha=0.1, color='#009e74')
-axs[1].plot(rt, mean_ENV_SUR_LUL_OFF, label='Surrogate Gaze', color='#56b4e9', linewidth=3)
+line2, = axs[1].plot(rt, mean_ENV_SUR_LUL_OFF, label='Surrogate Data', color='#56b4e9', linewidth=3)
 axs[1].fill_between(rt, mean_ENV_SUR_LUL_OFF - sigma_ENV_SUR_LUL_OFF, mean_ENV_SUR_LUL_OFF + sigma_ENV_SUR_LUL_OFF, alpha=0.1, color='#56b4e9')
 axs[1].axvline(x=0, color='black', linestyle='--')
-# axs[1].plot(rt, line_height * np.mean(BIG_ERCs_ENV_LUL_OFF) * p_v_env_lul_off, label='p < .05/2', linewidth=line_width, color='#d55e00')
-axs[1].plot(rt, line_height * 150 * p_v_env_lul_off, label='p < .05/2', linewidth=line_width, color='#d55e00')
-axs[1].set_xlabel("time relative to infant gaze offset (s)", fontsize=20)
-axs[1].set_ylabel("Amplitude Envelope of Lullabies", fontsize=16)
+# line3, = axs[1].plot(rt, line_height * np.mean(BIG_ERCs_SF_LUL_OFF) * p_v_sf_lul_off, label='p<.05/2', linewidth=line_width, color='#d55e00')
+line3, = axs[1].plot(rt, line_height * 160 * p_v_env_lul_off, label='p < 5th/2 percentile', linewidth=line_width, color='#d55e00')
+
+axs[1].set_xlabel("Time relative to Infant Gaze Offset (s)", fontsize=20)
+axs[1].set_ylabel("Amplitude Envelope", fontsize=20)
 axs[1].set_xlim(-5, 5)
-axs[1].set_ylim(80, 180)
-axs[1].text(0.05, 0.97, "(B)", transform=axs[1].transAxes, fontsize=12, verticalalignment='top')
+axs[1].set_ylim(80, 190)
+axs[1].text(0.05, 1.08, "(B)", transform=axs[1].transAxes, fontsize=18, verticalalignment='top')
+axs[1].text(0.05, 0.96, "Lullabies", transform=axs[1].transAxes, fontsize=20, verticalalignment='top')
 
 # Add legend to the right plot
-axs[1].legend(handles=[line1, line2, line3], fontsize=12, loc='upper right')
+axs[1].legend(handles=[line1, line2, line3], fontsize=14, loc='upper right')
+
 
 # plt.tight_layout()
 # plt.show()
-# plt.savefig("W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/gaze_figs_sec/ENV_pla_offlul_samescale.svg")
+# plt.savefig("W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/gaze_figs_sec/SF_pla_offlul_samescale.svg")
 plt.savefig("W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/revision/revision_gaze_figs_sec/ENV_pla_lul_OFF_samescale.svg")
-
-
-# line_height = 1.1
-
-
-# #pla
-# plt.subplot(1,3,2)
-# plt.plot(rt,mean_ENV_PLA_OFF, label = 'ENV PLA',color='#00887A')
-# plt.fill_between(rt, np.subtract(mean_ENV_PLA_OFF,sigma_ENV_PLA_OFF), np.add(mean_ENV_PLA_OFF, sigma_ENV_PLA_OFF), alpha = 0.1)
-# plt.plot(rt,mean_ENV_SUR_PLA_OFF, label = 'ENV SUR PLA',color='#9E9E9E')
-# plt.fill_between(rt, np.subtract(mean_ENV_SUR_PLA_OFF,sigma_ENV_SUR_PLA_OFF), np.add(mean_ENV_SUR_PLA_OFF, sigma_ENV_SUR_PLA_OFF), alpha = 0.1)
-# plt.axvline(x = 0, color = 'black', linestyle = '--')
-# plt.plot(rt, line_height*np.mean(BIG_ERCs_ENV_PLA_OFF) * p_v_pla_off,linewidth=line_width, color = '#E74926')
-# plt.xlabel("time relative to infant gaze offset")
-# plt.ylim((80,170))
-# plt.legend(loc='lower right')
-# plt.text(0.05, 0.05, "(B)", transform=plt.gca().transAxes, fontsize=12, verticalalignment='top')
-
-
-# #lul
-# plt.subplot(1,3,3)
-# plt.plot(rt,mean_ENV_LUL_OFF, label = 'ENV LUL',color='#00887A')
-# plt.fill_between(rt, np.subtract(mean_ENV_LUL_OFF,sigma_ENV_LUL_OFF), np.add(mean_ENV_LUL_OFF, sigma_ENV_LUL_OFF), alpha = 0.1)
-# plt.plot(rt,mean_ENV_SUR_LUL_OFF, label = 'ENV SUR LUL',color='#9E9E9E')
-# plt.fill_between(rt, np.subtract(mean_ENV_SUR_LUL_OFF,sigma_ENV_SUR_LUL_OFF), np.add(mean_ENV_SUR_LUL_OFF, sigma_ENV_SUR_LUL_OFF), alpha = 0.1)
-# plt.axvline(x = 0, color = 'black', linestyle = '--')
-# plt.plot(rt, line_height*np.mean(BIG_ERCs_ENV_LUL_OFF) * p_v_lul_off,linewidth=line_width, color = '#E74926')
-# plt.xlabel("time relative to infant gaze offset")
-# plt.ylim((80,170))
-# plt.legend(loc='lower right')
-# plt.text(0.05, 0.05, "(C)", transform=plt.gca().transAxes, fontsize=12, verticalalignment='top')
-
-
-# plt.tight_layout()
-# plt.savefig("W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/gaze_figs/beats_ENV_all_samescale.svg")
-# plt.show()
-
-
 
 
 
@@ -534,91 +386,45 @@ line_height = 1
 fig, axs = plt.subplots(1, 2, figsize=(20, 6))
 
 # Plot Playsongs
-axs[0].plot(rt, mean_F0_PLA_OFF, label='Social Gaze', color='#009e74', linewidth=3)
+axs[0].plot(rt, mean_F0_PLA_OFF, label='Social Gaze Data', color='#009e74', linewidth=3)
 axs[0].fill_between(rt, mean_F0_PLA_OFF - sigma_F0_PLA_OFF, mean_F0_PLA_OFF + sigma_F0_PLA_OFF, alpha=0.1, color='#009e74')
-axs[0].plot(rt, mean_F0_SUR_PLA_OFF, label='Surrogate Gaze', color='#56b4e9', linewidth=3)
+axs[0].plot(rt, mean_F0_SUR_PLA_OFF, label='Surrogate Data', color='#56b4e9', linewidth=3)
 axs[0].fill_between(rt, mean_F0_SUR_PLA_OFF - sigma_F0_SUR_PLA_OFF, mean_F0_SUR_PLA_OFF + sigma_F0_SUR_PLA_OFF, alpha=0.1, color='#56b4e9')
 axs[0].axvline(x=0, color='black', linestyle='--')
-# axs[0].plot(rt, line_height * np.mean(BIG_ERCs_F0_PLA_OFF) * p_v_f0_pla_off, linewidth=line_width, color='#d55e00')
-axs[0].plot(rt, line_height * 265 * p_v_f0_pla_off, linewidth=line_width, color='#d55e00')
-axs[0].set_xlabel("time relative to infant gaze offset (s)", fontsize=20)
-axs[0].set_ylabel("Pitch of Playsongs", fontsize=16)
+# axs[0].plot(rt, line_height * np.mean(BIG_ERCs_SF_PLA_OFF) * p_v_sf_pla_OFF, linewidth=line_width, color='#d55e00')
+axs[0].plot(rt, line_height * 260 * p_v_f0_pla_off, linewidth=line_width, color='#d55e00')
+axs[0].set_xlabel("Time relative to Infant Gaze Offset (s)", fontsize=20)
+axs[0].set_ylabel("Pitch (F0)", fontsize=20)
 axs[0].set_xlim(-5, 5)
 axs[0].set_ylim(230,270)
-axs[0].text(0.05, 0.97, "(A)", transform=axs[0].transAxes, fontsize=12, verticalalignment='top')
+axs[0].text(0.05, 1.08, "(A)", transform=axs[0].transAxes, fontsize=18, verticalalignment='top')
+axs[0].text(0.05, 0.96, "Playsongs", transform=axs[0].transAxes, fontsize=20, verticalalignment='top')
+
 
 # Plot Lullabies
-line_height = 1.05
-
-axs[1].plot(rt, mean_F0_LUL_OFF, label='Social Gaze', color='#009e74', linewidth=3)
+line1, = axs[1].plot(rt, mean_F0_LUL_OFF, label='Social Gaze Data', color='#009e74', linewidth=3)
 axs[1].fill_between(rt, mean_F0_LUL_OFF - sigma_F0_LUL_OFF, mean_F0_LUL_OFF + sigma_F0_LUL_OFF, alpha=0.1, color='#009e74')
-axs[1].plot(rt, mean_F0_SUR_LUL_OFF, label='Surrogate Gaze', color='#56b4e9', linewidth=3)
+line2, = axs[1].plot(rt, mean_F0_SUR_LUL_OFF, label='Surrogate Data', color='#56b4e9', linewidth=3)
 axs[1].fill_between(rt, mean_F0_SUR_LUL_OFF - sigma_F0_SUR_LUL_OFF, mean_F0_SUR_LUL_OFF + sigma_F0_SUR_LUL_OFF, alpha=0.1, color='#56b4e9')
 axs[1].axvline(x=0, color='black', linestyle='--')
-# axs[1].plot(rt, line_height * np.mean(BIG_ERCs_F0_LUL_OFF) * p_v_f0_lul_off, label='p < .05/2', linewidth=line_width, color='#d55e00')
-axs[1].plot(rt, line_height * 265 * p_v_f0_lul_off, label='p < .05/2', linewidth=line_width, color='#d55e00')
-axs[1].set_xlabel("time relative to infant gaze offset (s)", fontsize=20)
-axs[1].set_ylabel("Pitch of Lullabies", fontsize=16)
+# line3, = axs[1].plot(rt, line_height * np.mean(BIG_ERCs_SF_LUL_OFF) * p_v_sf_lul_OFF, label='p<.05/2', linewidth=line_width, color='#d55e00')
+line3, = axs[1].plot(rt, line_height * 260 * p_v_f0_lul_off, label='p < 5th/2 percentile', linewidth=line_width, color='#d55e00')
+
+axs[1].set_xlabel("Time relative to Infant Gaze Offset (s)", fontsize=20)
+axs[1].set_ylabel("Pitch (F0)", fontsize=20)
 axs[1].set_xlim(-5, 5)
 axs[1].set_ylim(230,270)
-axs[1].text(0.05, 0.97, "(B)", transform=axs[1].transAxes, fontsize=12, verticalalignment='top')
+axs[1].text(0.05, 1.08, "(B)", transform=axs[1].transAxes, fontsize=18, verticalalignment='top')
+axs[1].text(0.05, 0.96, "Lullabies", transform=axs[1].transAxes, fontsize=20, verticalalignment='top')
 
 # Add legend to the right plot
-axs[1].legend(handles=[line1, line2, line3], fontsize=12, loc='upper right')
+axs[1].legend(handles=[line1, line2, line3], fontsize=14, loc='upper right')
+
 
 # plt.tight_layout()
 # plt.show()
 plt.savefig("W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/seconds/revision/revision_gaze_figs_sec/F0_pla_lul_OFF_samescale.svg")
 
 
-# line_height = 1.05
-
-# #total
-# plt.figure(figsize=(12,6))
-# plt.subtitle("Pitch")
-# plt.subplot(1,3,1)
-# plt.plot(rt,mean_F0_TOTAL, label = 'F0 TOTAL',color='#00887A')
-# plt.fill_between(rt, np.subtract(mean_F0_TOTAL,sigma_F0_TOTAL), np.add(mean_F0_TOTAL, sigma_F0_TOTAL), alpha = 0.1)
-# plt.plot(rt,mean_F0_SUR_TOTAL, label = 'F0 SUR TOTAL',color='#9E9E9E')
-# plt.fill_between(rt, np.subtract(mean_F0_SUR_TOTAL,sigma_F0_SUR_TOTAL), np.add(mean_F0_SUR_TOTAL, sigma_F0_SUR_TOTAL), alpha = 0.1)
-# plt.axvline(x = 0, color = 'black', linestyle = '--')
-# plt.plot(rt, line_height*np.mean(BIG_ERCs_F0_TOTAL) * p_v_total,linewidth=line_width, color = '#E74926')
-# plt.xlabel("time relative to infant gaze offset")
-# plt.ylabel("Pitch")
-# plt.ylim((225,300))
-# plt.legend(loc='upper right')
-# plt.text(0.05, 0.95, "(A)", transform=plt.gca().transAxes, fontsize=12, verticalalignment='top', horizontalalignment='left')
-
-# #pla
-# plt.subplot(1,3,2)
-# plt.plot(rt,mean_F0_PLA_OFF, label = 'F0 PLA',color='#00887A')
-# plt.fill_between(rt, np.subtract(mean_F0_PLA_OFF,sigma_F0_PLA_OFF), np.add(mean_F0_PLA_OFF, sigma_F0_PLA_OFF), alpha = 0.1)
-# plt.plot(rt,mean_F0_SUR_PLA_OFF, label = 'F0 SUR PLA',color='#9E9E9E')
-# plt.fill_between(rt, np.subtract(mean_F0_SUR_PLA_OFF,sigma_F0_SUR_PLA_OFF), np.add(mean_F0_SUR_PLA_OFF, sigma_F0_SUR_PLA_OFF), alpha = 0.1)
-# plt.axvline(x = 0, color = 'black', linestyle = '--')
-# plt.plot(rt, line_height*np.mean(BIG_ERCs_F0_PLA_OFF) * p_v_pla_off,linewidth=line_width, color = '#E74926')
-# plt.xlabel("time relative to infant gaze offset")
-# plt.ylim((225,300))
-# plt.legend(loc='upper right')
-# plt.text(0.05, 0.95, "(B)", transform=plt.gca().transAxes, fontsize=12, verticalalignment='top')
-
-
-# #lul
-# plt.subplot(1,3,3)
-# plt.plot(rt,mean_F0_LUL_OFF, label = 'F0 LUL',color='#00887A')
-# plt.fill_between(rt, np.subtract(mean_F0_LUL_OFF,sigma_F0_LUL_OFF), np.add(mean_F0_LUL_OFF, sigma_F0_LUL_OFF), alpha = 0.1)
-# plt.plot(rt,mean_F0_SUR_LUL_OFF, label = 'F0 SUR LUL',color='#9E9E9E')
-# plt.fill_between(rt, np.subtract(mean_F0_SUR_LUL_OFF,sigma_F0_SUR_LUL_OFF), np.add(mean_F0_SUR_LUL_OFF, sigma_F0_SUR_LUL_OFF), alpha = 0.1)
-# plt.axvline(x = 0, color = 'black', linestyle = '--')
-# plt.plot(rt, line_height*np.mean(BIG_ERCs_F0_LUL_OFF) * p_v_lul_off,linewidth=line_width, color = '#E74926')
-# plt.xlabel("time relative to infant gaze offset")
-# plt.ylim((225,300))
-# plt.legend(loc='upper right')
-# plt.text(0.05, 0.95, "(C)", transform=plt.gca().transAxes, fontsize=12, verticalalignment='top')
-
-
-# plt.tight_layout()
-# plt.savefig("W:/hoehl/projects/sing/Acoustic_analysis_SRE/specflux_python/gaze_figs/beats_F0_all_samescale.svg")
-# plt.show()
 
 

@@ -12,7 +12,7 @@ import pandas as pd
 import glob
 
 # Define the directory containing your files
-directory = "W:/hoehl/projects/sing/Behavioural_coding/Gaze/SingGaze_looks/"
+directory = "W:/hoehl/projects/sing/Behavioural_coding/Gaze/SINGGaze_all_mum_with_short_looks/"
 output_directory = "W:/hoehl/projects/sing/Logs/"
 
 # Get all relevant files (adjust pattern if needed)

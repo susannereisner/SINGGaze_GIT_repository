@@ -136,8 +136,8 @@ def get_f0_Praat(filename): ### get F0 using parselmouth (python implementation 
 	pitch_values[pitch_values==0] = np.nan
 	return pitch_values
 
-ws = 0.02   #ws = window size (in seconds)
-hs = 0.01   #hs = hop size (in seconds)
+ws = 0.03   #ws = window size (in seconds)
+hs = 0.02   #hs = hop size (in seconds)
 
 # input directory containing the audio files
 audio_dir = 'W:/hoehl/projects/sing/Audio/full_length_LULPLA/'
